@@ -1,0 +1,102 @@
+TOOL:	xrun	25.03-s001: Started on Nov 11, 2026 at 02:19:31 EST
+xrun: 25.03-s001: (c) Copyright 1995-2025 Cadence Design Systems, Inc.
+	Top level design units:
+		uvm_pkg
+		ebag_pkg
+		tb_top
+xmelab: *W,CGPIDF: Covergroup "per_instance" option , by default, is set as 0.
+xmelab: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+Loading snapshot worklib.tb_top:sv .................... Done
+SVSEED default: 1
+xcelium> source /xcelium25.03/tools/xcelium/files/xmsimrc
+xcelium> source /xcelium25.03/tools//methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+CDNS-UVM-1.2 (25.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test ebag_max_test...
+UVM_ERROR testbench.sv(409) @ 3125000: uvm_test_top.env.sb [SB] bag 4 (MAX) elem 10: exp -4 got 0
+UVM_ERROR testbench.sv(409) @ 5185000: uvm_test_top.env.sb [SB] bag 7 (MAX) elem 0: exp -93 got 0
+UVM_ERROR testbench.sv(409) @ 11155000: uvm_test_top.env.sb [SB] bag 17 (MAX) elem 9: exp -11 got 0
+UVM_ERROR testbench.sv(409) @ 11325000: uvm_test_top.env.sb [SB] bag 18 (MAX) elem 1: exp -48 got 0
+UVM_ERROR testbench.sv(409) @ 11555000: uvm_test_top.env.sb [SB] bag 19 (MAX) elem 14: exp -13 got 0
+UVM_ERROR testbench.sv(409) @ 14865000: uvm_test_top.env.sb [SB] bag 24 (MAX) elem 14: exp -13 got 0
+UVM_ERROR testbench.sv(409) @ 15025000: uvm_test_top.env.sb [SB] bag 25 (MAX) elem 15: exp -16 got 0
+UVM_ERROR testbench.sv(409) @ 20055000: uvm_test_top.env.sb [SB] bag 34 (MAX) elem 1: exp -6 got 0
+UVM_ERROR testbench.sv(409) @ 22815000: uvm_test_top.env.sb [SB] bag 40 (MAX) elem 0: exp -37 got 0
+UVM_ERROR testbench.sv(409) @ 24215000: uvm_test_top.env.sb [SB] bag 43 (MAX) elem 1: exp -14 got 0
+UVM_ERROR testbench.sv(409) @ 29405000: uvm_test_top.env.sb [SB] bag 53 (MAX) elem 14: exp -8 got 0
+UVM_ERROR testbench.sv(409) @ 39895000: uvm_test_top.env.sb [SB] bag 73 (MAX) elem 8: exp -72 got 0
+UVM_ERROR testbench.sv(409) @ 41595000: uvm_test_top.env.sb [SB] bag 78 (MAX) elem 1: exp -104 got 0
+UVM_ERROR testbench.sv(409) @ 42225000: uvm_test_top.env.sb [SB] bag 80 (MAX) elem 1: exp -58 got 0
+UVM_ERROR testbench.sv(409) @ 44365000: uvm_test_top.env.sb [SB] bag 85 (MAX) elem 1: exp -33 got 0
+UVM_ERROR testbench.sv(409) @ 55015000: uvm_test_top.env.sb [SB] bag 100 (MAX) elem 12: exp -25 got 0
+UVM_ERROR testbench.sv(409) @ 61865000: uvm_test_top.env.sb [SB] bag 112 (MAX) elem 12: exp -52 got 0
+UVM_ERROR testbench.sv(409) @ 72405000: uvm_test_top.env.sb [SB] bag 129 (MAX) elem 1: exp -58 got 0
+UVM_ERROR testbench.sv(409) @ 84905000: uvm_test_top.env.sb [SB] bag 148 (MAX) elem 12: exp -18 got 0
+UVM_ERROR testbench.sv(409) @ 85515000: uvm_test_top.env.sb [SB] bag 150 (MAX) elem 1: exp -9 got 0
+UVM_ERROR testbench.sv(409) @ 94405000: uvm_test_top.env.sb [SB] bag 162 (MAX) elem 9: exp -11 got 0
+UVM_ERROR testbench.sv(409) @ 97395000: uvm_test_top.env.sb [SB] bag 168 (MAX) elem 0: exp -120 got 0
+UVM_ERROR testbench.sv(409) @ 97755000: uvm_test_top.env.sb [SB] bag 169 (MAX) elem 12: exp -14 got 0
+UVM_ERROR testbench.sv(409) @ 106875000: uvm_test_top.env.sb [SB] bag 190 (MAX) elem 1: exp -6 got 0
+UVM_ERROR testbench.sv(409) @ 117005000: uvm_test_top.env.sb [SB] bag 208 (MAX) elem 6: exp -13 got 0
+UVM_ERROR testbench.sv(409) @ 127185000: uvm_test_top.env.sb [SB] bag 226 (MAX) elem 1: exp -6 got 0
+UVM_ERROR testbench.sv(409) @ 134645000: uvm_test_top.env.sb [SB] bag 240 (MAX) elem 9: exp -13 got 0
+UVM_ERROR testbench.sv(409) @ 137655000: uvm_test_top.env.sb [SB] bag 247 (MAX) elem 0: exp -69 got 0
+UVM_ERROR testbench.sv(409) @ 150615000: uvm_test_top.env.sb [SB] bag 267 (MAX) elem 1: exp -33 got 0
+UVM_ERROR testbench.sv(409) @ 159055000: uvm_test_top.env.sb [SB] bag 283 (MAX) elem 2: exp -84 got 0
+UVM_ERROR testbench.sv(409) @ 162015000: uvm_test_top.env.sb [SB] bag 287 (MAX) elem 1: exp -58 got 0
+UVM_ERROR testbench.sv(409) @ 163535000: uvm_test_top.env.sb [SB] bag 291 (MAX) elem 12: exp -16 got 0
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 167825000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO testbench.sv(342) @ 167825000: uvm_test_top.env.mem [AXI] bursts=5286 max outstanding=4 (limit 4)
+UVM_INFO testbench.sv(425) @ 167825000: uvm_test_top.env.sb [SB] bags checked=302  mismatches=32  coverage=75.0%
+UVM_INFO testbench.sv(556) @ 167825000: uvm_test_top [TEST] *** TEST FAILED ***
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(851) @ 167825000: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :    6
+UVM_WARNING :    0
+UVM_ERROR :   32
+UVM_FATAL :    0
+** Report counts by id
+[AXI]     1
+[RNTST]     1
+[SB]    33
+[TEST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+
+Simulation complete via $finish(1) at time 167825 NS + 72
+/xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> exit
+xmsim: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
+
+coverage setup:
+  workdir  :  ./cov_work
+  dutinst  :  tb_top(tb_top)
+  scope    :  scope
+  testname :  test
+
+coverage files:
+  model(design data) :  ./cov_work/scope/icc_00000000_58d466af.ucm
+  data               :  ./cov_work/scope/test/icc_00000000_58d466af.ucd

@@ -28,3 +28,14 @@ Bug injection: add `+define+BUG_MAX_INIT` (or any `BUG_*` in `rtl/`) and confirm
 
 EDA Playground: Testbench pane = `tb_top.sv` with `` `include "ebag_ifs.sv" `` and `` `include "ebag_pkg.sv" `` at the top,
 plus tabs for those two files; Design pane = the four files in `../rtl/`. Select UVM 1.2 + Xcelium or VCS.
+
+## Results (Cadence Xcelium 25.03, UVM 1.2, run on EDA Playground)
+
+| Run | Result |
+|---|---|
+| `ebag_full_test +NUM_BAGS=300` (SUM pass then MAX pass) | PASS, `UVM_ERROR: 0`; 604 bags checked, 0 mismatches, functional coverage 100% |
+| `ebag_stress_test +NUM_BAGS=300` (heavy back-pressure, slow memory) | PASS, `UVM_ERROR: 0`; 302 bags checked |
+| `ebag_max_test` with `+define+BUG_MAX_INIT` | FAIL (as intended): 32 mismatches, every one a bag whose column maximum is negative (hardware returns 0) |
+| AXI outstanding reads | reached and never exceeded the limit (max 4, limit 4) |
+
+Logs are in `uvm/logs/`. Coverage closure: the first full run reached 93.3%; the missing bin was "bag with all indices out of range", which random stimulus hits less than once per 600 bags, so two directed all-OOB bags were added to the sequence.

@@ -208,9 +208,11 @@ package ebag_pkg;
         endfunction
         function bit [63:0] beat_data(bit [31:0] addr);
             bit [63:0] d;
-            longint off = longint'(addr) - longint'(cfg.base);
-            for (int b = 0; b < 8; b++)
-                d[8*b +: 8] = (off + b >= 0 && off + b < cfg.table_q.size()) ? cfg.table_q[off + b] : 8'hEE;
+            int off = int'(longint'(addr) - longint'(cfg.base));
+            for (int b = 0; b < 8; b++) begin
+                int i = off + b;
+                d[8*b +: 8] = (i >= 0 && i < cfg.table_q.size()) ? cfg.table_q[i] : 8'hEE;
+            end
             return d;
         endfunction
         task run_phase(uvm_phase phase);
@@ -273,6 +275,8 @@ package ebag_pkg;
         // coverage of what was checked
         int bag_size, bag_valid; bit bag_mode, bag_has_oob, stalled;
         covergroup cg_bag;
+            option.per_instance = 1;
+            option.name = "bag";
             cp_mode:  coverpoint bag_mode;
             cp_valid: coverpoint bag_valid { bins none = {0}; bins one = {1}; bins few = {[2:4]};
                                              bins many = {[5:16]}; bins lots = {[17:$]}; }
@@ -331,6 +335,7 @@ package ebag_pkg;
         function void check_phase(uvm_phase phase);
             if (expq.size() != 0) `uvm_error("SB", $sformatf("%0d bags never came out", expq.size()))
             if (cur_bag.size() != 0) `uvm_error("SB", "partial bag left at end of test (missing TLAST)")
+            if (n_bags_checked == 0) `uvm_error("SB", "no bags were checked")
         endfunction
         function void report_phase(uvm_phase phase);
             `uvm_info("SB", $sformatf("bags checked=%0d  mismatches=%0d  coverage=%.1f%%",
@@ -424,6 +429,15 @@ package ebag_pkg;
                 if (!b.randomize()) `uvm_fatal("RND", "bag")
                 b.start(env.idx.sqr);
             end
+            // directed corner: bags whose indices are all out of range (output = zero vector, TUSER = 0).
+            // Random stimulus hits this <1 time per 600 bags, so it is forced here.
+            begin
+                bag_seq b1 = bag_seq::type_id::create("oob1"), b3 = bag_seq::type_id::create("oob3");
+                b1.idx = '{cfg.num_rows};
+                b3.idx = '{cfg.num_rows + 7, 32'hFFFF_FFFF, cfg.num_rows};
+                b1.start(env.idx.sqr);
+                b3.start(env.idx.sqr);
+            end
             // wait for the engine to drain
             do reg_rd(R_STATUS, v); while (!v[0] || env.sb.expq.size() != 0);
             reg_rd(R_BAGS, v);
@@ -478,5 +492,23 @@ package ebag_pkg;
             cfg.p_out_stall = 75; cfg.p_arready = 30; cfg.p_rgap = 50; cfg.lat_min = 5; cfg.lat_max = 30;
             cfg.p_idx_gap = 40; cfg.mode_max = $urandom_range(0, 1);
         endfunction
+    endclass
+
+    // SUM pass then MAX pass in one run (counters are cumulative), so one log shows full mode coverage.
+    class ebag_full_test extends ebag_base_test;
+        `uvm_component_utils(ebag_full_test)
+        function new(string n, uvm_component p); super.new(n, p); endfunction
+        task run_phase(uvm_phase phase);
+            int unsigned n = 200;
+            void'($value$plusargs("NUM_BAGS=%d", n));
+            phase.raise_objection(this);
+            for (int m = 0; m < 2; m++) begin
+                ebag_vseq v = ebag_vseq::type_id::create($sformatf("v%0d", m));
+                cfg.mode_max = m;
+                v.env = env; v.cfg = cfg; v.n_bags = n;
+                v.start(null);
+            end
+            phase.drop_objection(this);
+        endtask
     endclass
 endpackage
